@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
 
 export interface ICourse {
+    _id: Types.ObjectId;
     courseId: string;
     title: string;
     slug: string;
@@ -8,11 +9,8 @@ export interface ICourse {
     type: string;
     image: string;
     fee: string;
-    // rating: number;
     rating?: number;
-    // totalRating: number;
     totalRating?: number;
-    // totalStudentsEnroll: number;
     totalStudentsEnroll: number;
     mentor: Types.ObjectId;
     courseStart: string;
@@ -24,8 +22,8 @@ export interface ICourse {
     courseOverview: string;
     curriculum: string[];
     courseIncludes: string[];
-    // softwareIncludes: string[];
     softwareIncludes?: string[];
-    // jobOption: string[];
     jobOption?: string[];
+    createdAt: Date;
+    updatedAt: Date;
 }

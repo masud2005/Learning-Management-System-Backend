@@ -1,6 +1,9 @@
 import cors from "cors";
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { CourseRoutes } from "./app/modules/course/course.route";
+import { success } from "zod";
+import { notFound } from "./app/middlewares/notFound";
+import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
 const app = express();
 
 app.use(express.json());
@@ -13,5 +16,11 @@ app.get("/", (req: Request, res: Response) => {
     message: "Learning Management System",
   });
 });
+
+// global error handler
+app.use(globalErrorHandler);
+
+// route not found
+app.use(notFound);
 
 export default app;

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CourseService } from "./course.service";
+import { catchAsync } from "../../utils/catchAsync";
 
 const createCourse = async (req: Request, res: Response) => {
   try {
@@ -16,24 +17,39 @@ const createCourse = async (req: Request, res: Response) => {
   }
 };
 
-const updateCourse = async (req: Request, res: Response) => {
-  try {
-    const courseId = req.params.id;
-    const payload = req.body;
-    console.log(payload);
+const updateCourse = catchAsync(async (req: Request, res: Response) => {
+  const courseId = req.params.id;
+  const payload = req.body;
+  // console.log(payload);
 
-    const course = await CourseService.updateCourse(courseId, payload);
+  const course = await CourseService.updateCourse(courseId, payload);
 
-    res.send({
-      success: true,
-      statusCode: 200,
-      message: "Course updated successfully",
-      data: course,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+  res.send({
+    success: true,
+    statusCode: 200,
+    message: "Course updated successfully",
+    data: course,
+  });
+});
+
+// const updateCourse = async (req: Request, res: Response) => {
+//   try {
+//     const courseId = req.params.id;
+//     const payload = req.body;
+//     console.log(payload);
+
+//     const course = await CourseService.updateCourse(courseId, payload);
+
+//     res.send({
+//       success: true,
+//       statusCode: 200,
+//       message: "Course updated successfully",
+//       data: course,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const deleteCourse = async (req: Request, res: Response) => {
   const courseId = req.params.id;

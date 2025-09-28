@@ -8,6 +8,16 @@ const createCourse = async (payload: Partial<ICourse>) => {
   return course;
 };
 
+const updateCourse = async (courseId: string, payload: Partial<ICourse>) => {
+  const newUpdateCourse = await CourseModel.findByIdAndUpdate(
+    courseId,
+    payload,
+    { new: true, runValidators: true }
+  );
+  return newUpdateCourse;
+};
+
 export const CourseService = {
   createCourse,
+  updateCourse,
 };

@@ -17,7 +17,25 @@ const updateCourse = async (courseId: string, payload: Partial<ICourse>) => {
   return newUpdateCourse;
 };
 
+const allCourses = async () => {
+  const courses = await CourseModel.find();
+  const totalCourses = await CourseModel.countDocuments();
+  return {
+    courses,
+    meta: {
+      total: totalCourses,
+    },
+  };
+};
+
+const singleCourse = async (courseId: string) => {
+  const course = await CourseModel.findById(courseId);
+  return course;
+};
+
 export const CourseService = {
   createCourse,
   updateCourse,
+  allCourses,
+  singleCourse,
 };

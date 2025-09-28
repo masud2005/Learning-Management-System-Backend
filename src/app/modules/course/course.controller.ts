@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { CourseService } from "./course.service";
-import { success } from "zod";
 
 const createCourse = async (req: Request, res: Response) => {
   try {
@@ -21,13 +20,13 @@ const updateCourse = async (req: Request, res: Response) => {
   try {
     const courseId = req.params.id;
     const payload = req.body;
-    console.log(payload)
+    console.log(payload);
 
     const course = await CourseService.updateCourse(courseId, payload);
 
     res.send({
       success: true,
-      statusCode: 201,
+      statusCode: 200,
       message: "Course updated successfully",
       data: course,
     });
@@ -36,7 +35,30 @@ const updateCourse = async (req: Request, res: Response) => {
   }
 };
 
+const allCourses = async (req: Request, res: Response) => {
+  const courses = await CourseService.allCourses();
+  res.send({
+    success: true,
+    statusCode: 200,
+    message: "Get all courses retrieved successfully",
+    data: courses,
+  });
+};
+
+const singleCourse = async (req: Request, res: Response) => {
+  const courseId = req.params.id;
+  const course = await CourseService.singleCourse(courseId);
+  res.send({
+    success: true,
+    statusCode: 200,
+    message: "Single course retrieved successfully",
+    data: course,
+  });
+};
+
 export const CourseController = {
   createCourse,
   updateCourse,
+  allCourses,
+  singleCourse,
 };

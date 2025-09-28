@@ -35,6 +35,18 @@ const updateCourse = async (req: Request, res: Response) => {
   }
 };
 
+const deleteCourse = async (req: Request, res: Response) => {
+  const courseId = req.params.id;
+  const course = await CourseService.deleteCourse(courseId);
+
+  res.send({
+    success: true,
+    statusCode: 200,
+    message: "Course delete successfully",
+    data: course,
+  });
+};
+
 const allCourses = async (req: Request, res: Response) => {
   const courses = await CourseService.allCourses();
   res.send({
@@ -59,6 +71,7 @@ const singleCourse = async (req: Request, res: Response) => {
 export const CourseController = {
   createCourse,
   updateCourse,
+  deleteCourse,
   allCourses,
   singleCourse,
 };

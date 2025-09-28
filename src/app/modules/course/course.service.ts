@@ -17,6 +17,11 @@ const updateCourse = async (courseId: string, payload: Partial<ICourse>) => {
   return newUpdateCourse;
 };
 
+const deleteCourse = async (courseId: string) => {
+  const course = await CourseModel.findByIdAndDelete(courseId);
+  return course;
+};
+
 const allCourses = async () => {
   const courses = await CourseModel.find();
   const totalCourses = await CourseModel.countDocuments();
@@ -36,6 +41,7 @@ const singleCourse = async (courseId: string) => {
 export const CourseService = {
   createCourse,
   updateCourse,
+  deleteCourse,
   allCourses,
   singleCourse,
 };

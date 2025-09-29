@@ -26,7 +26,7 @@ const allCourses = async () => {
   const courses = await CourseModel.find();
   const totalCourses = await CourseModel.countDocuments();
   return {
-    courses,
+    data: courses,
     meta: {
       total: totalCourses,
     },

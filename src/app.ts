@@ -4,12 +4,14 @@ import { CourseRoutes } from "./app/modules/course/course.route";
 import { success } from "zod";
 import { notFound } from "./app/middlewares/notFound";
 import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
+import { CategoryRoutes } from "./app/modules/category/category.route";
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
 app.use("/api/v1/course", CourseRoutes);
+app.use("/api/v1/category", CategoryRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({

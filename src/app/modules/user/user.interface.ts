@@ -1,13 +1,33 @@
 import { Types } from "mongoose";
 
+export enum IsActive {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  BLOCKED = "BLOCKED",
+}
+
+export enum Role {
+  ADMIN = "ADMIN",
+  MENTOR = "MENTOR",
+  STUDENT = "STUDENT",
+}
+
+export interface IAuthProvider {
+  provider: "google" | "credentials";
+  providerId: string;
+}
+
 export interface IUser {
-    _id: Types.ObjectId;
-    id: string;
-    password: string;
-    isPasswordChanged: boolean;
-    role: 'student' | 'mentor' | 'admin';
-    status: 'active' | 'blocked' | 'pending';
-    isDeleted: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+  _id?: Types.ObjectId;
+  name: string;
+  email: string;
+  password?: string;
+  phone?: string;
+  picture?: string;
+  address?: string;
+  isDeleted?: boolean;
+  isActive?: IsActive;
+  isVerified?: boolean;
+  role: Role;
+  auths: IAuthProvider[];
 }
